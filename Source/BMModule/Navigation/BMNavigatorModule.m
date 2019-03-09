@@ -224,11 +224,14 @@ WX_EXPORT_METHOD(@selector(statusBarHidden:))
                 }
                 
                 button.frame = rect;
+
+                // 按钮图片自适应大小，不强制拉伸
+                button.imageView.contentMode = UIViewContentModeScaleAspectFit;
                 
-                [button setBackgroundImage:image forState:UIControlStateNormal];
-                [button setBackgroundImage:image forState:UIControlStateHighlighted];
-//                [button setImage:image forState:UIControlStateNormal];
-//                [button setImage:image forState:UIControlStateHighlighted];
+//                [button setBackgroundImage:image forState:UIControlStateNormal];
+//                [button setBackgroundImage:image forState:UIControlStateHighlighted];
+                [button setImage:image forState:UIControlStateNormal];
+                [button setImage:image forState:UIControlStateHighlighted];
                 
                 [self setNavItemWithView:button itemPosition:itemPosition];
                 
@@ -302,10 +305,10 @@ WX_EXPORT_METHOD(@selector(statusBarHidden:))
             
                     button.frame = rect;
                     
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
-                    [button setBackgroundImage:image forState:UIControlStateHighlighted];
-//                    [button setImage:image forState:UIControlStateNormal];
-//                    [button setImage:image forState:UIControlStateHighlighted];
+//                    [button setBackgroundImage:image forState:UIControlStateNormal];
+//                    [button setBackgroundImage:image forState:UIControlStateHighlighted];
+                    [button setImage:image forState:UIControlStateNormal];
+                    [button setImage:image forState:UIControlStateHighlighted];
                     [self setNavItemWithView:button itemPosition:itemPosition];
                 });
             }];
