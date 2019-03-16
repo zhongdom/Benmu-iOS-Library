@@ -8,6 +8,7 @@
 
 #import "WXScrollerComponent+BMExtend.h"
 #import <BMDotGifHeader.h>
+#import "RRDotGifFooter.h"
 
 @implementation WXScrollerComponent (BMExtend)
 
@@ -113,7 +114,7 @@ WX_EXPORT_METHOD(@selector(loadMoreEnd));
 
     NSNumber *showLoadMore = objc_getAssociatedObject(self, "bm_showLoadMore");
     if (showLoadMore && [showLoadMore boolValue]) {
-        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        MJRefreshAutoNormalFooter *footer = [RRDotGifFooter footerWithRefreshingBlock:^{
             [self bmLoadMore];
         }];
         NSString *loadingMoreTitle = objc_getAssociatedObject(self, "bm_loadingMoreTitle");
