@@ -137,6 +137,7 @@
     [SVProgressHUD setForegroundColor:K_WHITE_COLOR];
     [SVProgressHUD setCornerRadius:4.0];
     [SVProgressHUD setMinimumDismissTimeInterval:1.5];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 }
 
 + (void)registerBmHandlers
