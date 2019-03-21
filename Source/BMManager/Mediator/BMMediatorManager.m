@@ -122,18 +122,18 @@
  */
 - (void)loadJSMediator:(BOOL)reload
 {
-//    if (!reload && self.jsMediator.instance.rootView) {
-//        return;
-//    }
-//    
-//    if (self.jsMediator) {
-//        self.jsMediator = nil;
-//    }
-//    BMBaseViewController *jsMediatorVc = [[BMBaseViewController alloc] init];
-//    jsMediatorVc.url = [BMAppResource configJSFullURLWithPath:[BMConfigManager shareInstance].platform.page.mediatorPage?:K_JS_MEDIATOR_PATH];
-//    [jsMediatorVc view];
-//    
-//    self.jsMediator = jsMediatorVc;
+    if (!reload && self.jsMediator.instance.rootView) {
+        return;
+    }
+    
+    if (self.jsMediator) {
+        self.jsMediator = nil;
+    }
+    BMBaseViewController *jsMediatorVc = [[BMBaseViewController alloc] init];
+    jsMediatorVc.url = [BMAppResource configJSFullURLWithPath:[BMConfigManager shareInstance].platform.page.mediatorPage?:K_JS_MEDIATOR_PATH];
+    [jsMediatorVc view];
+    
+    self.jsMediator = jsMediatorVc;
 }
 #pragma mark - Api Request
 
