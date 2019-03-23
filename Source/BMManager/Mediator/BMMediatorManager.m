@@ -275,33 +275,31 @@
 {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"更新提示" message:@"更新数据已准备就绪，重启APP更新获得完整功能体验。" preferredStyle:UIAlertControllerStyleAlert];
+        
+//        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"更新提示" message:@"更新数据已准备就绪，重启APP更新获得完整功能体验。" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            BMAppDelegate *app = [UIApplication sharedApplication].delegate;
+//            UIWindow *window = app.window;
+//            [UIView animateWithDuration: 0.8f animations:^{
+//                window.alpha = 0;
+//                window.frame = CGRectMake(window.bounds.size.width / 2, window.bounds.size.height / 2, 0, 0);
+//            } completion:^(BOOL finished) {
+//                exit(0);
+//            }];
+//        }];
+//        [alertVc addAction:confirmAction];
+//        [self.currentViewController presentViewController:alertVc animated:YES completion:nil];
+        
+        
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"更新提示" message:@"更新数据已准备就绪，完成更新获得完整功能体验。" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"稍后升级" style:UIAlertActionStyleDefault handler:nil];
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            BMAppDelegate *app = [UIApplication sharedApplication].delegate;
-            UIWindow *window = app.window;
-            [UIView animateWithDuration: 0.8f animations:^{
-                window.alpha = 0;
-                window.frame = CGRectMake(window.bounds.size.width / 2, window.bounds.size.height / 2, 0, 0);
-            } completion:^(BOOL finished) {
-                exit(0);
-            }];
+//            [[BMResourceManager sharedInstance] compareVersion];
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_BMAppReStartNotification object:nil];
         }];
+//        [alertVc addAction:cancelAction];
         [alertVc addAction:confirmAction];
         [self.currentViewController presentViewController:alertVc animated:YES completion:nil];
-        
-//        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"更新提示" message:@"更新数据已准备就绪，完成更新获得完整功能体验。" preferredStyle:UIAlertControllerStyleAlert];
-//
-////        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"稍后升级" style:UIAlertActionStyleDefault handler:nil];
-//
-//        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-////            [[BMResourceManager sharedInstance] compareVersion];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:K_BMAppReStartNotification object:nil];
-//        }];
-//
-////        [alertVc addAction:cancelAction];
-//        [alertVc addAction:confirmAction];
-//
-//        [self.currentViewController presentViewController:alertVc animated:YES completion:nil];
     });
     
 }
