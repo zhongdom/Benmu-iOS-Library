@@ -31,6 +31,14 @@
     UIColor *setColor = [UIColor colorWithHexString:TK_PlatformInfo().page.navBarColor];
     [self.navigationBar ex_setBackgroundColor:setColor?:K_NAV_BAR_COLOR];
     
+    // 修复iOS 11 以前版本状态栏背景为黑色问题
+    if (!@available(iOS 11.0, *)) {
+        CGFloat statusBarH = UIApplication.sharedApplication.statusBarFrame.size.height;
+        UIView *statusBarView = [[UIView alloc]   initWithFrame:CGRectMake(0, -statusBarH, self.view.bounds.size.width, statusBarH)];
+        statusBarView.backgroundColor = setColor?:K_NAV_BAR_COLOR;
+        [self.navigationBar addSubview:statusBarView];
+    }
+    
     [self setTitleFontSize];
     
     // 注册改变字体的通知
