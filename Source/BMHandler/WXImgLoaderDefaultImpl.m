@@ -113,6 +113,11 @@
         return nil;
     }
     
+    // 对没有传入尺寸参数的url拼接参数
+    if ([url hasPrefix:@"http"] && ![url containsString:@"?"]) {
+        url = [NSString stringWithFormat:@"%@?imageMogr/v2/thumbnail/750x", url];
+    }
+    
     [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:url]
                                                     options:SDWebImageRetryFailed | SDWebImageAllowInvalidSSLCertificates
                                                    progress:^(NSInteger receivedSize, NSInteger expectedSize) {
