@@ -53,6 +53,11 @@
         url = [@"https:" stringByAppendingString:url];
     }
     
+    // 处理url有中文的情况
+    if ([url hasPrefix:@"http"] && [self isIncludeChineseInString: url]) {
+        url = [url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    }
+    
     NSURL *imgUrl = [NSURL URLWithString:url];
     
     if (!imgUrl) {
@@ -129,6 +134,16 @@
                                                    }];
     
     return nil;
+}
+
+- (BOOL)isIncludeChineseInString:(NSString *)str {
+    for(int i=0; i< str.length; i++) {
+        int a = [str characterAtIndex: i];
+        if( a > 0x4e00 && a < 0x9fff) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
