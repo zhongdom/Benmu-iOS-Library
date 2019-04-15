@@ -64,6 +64,7 @@
     }
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, K_SCREEN_WIDTH, height)];
     self.webView.backgroundColor = K_BACKGROUND_COLOR;
+    self.webView.scrollView.bounces = NO;
     self.webView.delegate = self;
 
     self.urlStr = self.routerInfo.url;
