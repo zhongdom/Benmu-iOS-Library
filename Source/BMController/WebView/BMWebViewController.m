@@ -71,6 +71,7 @@
     self.webView.backgroundColor = self.routerInfo.backgroundColor? [UIColor colorWithHexString:self.routerInfo.backgroundColor]: K_BACKGROUND_COLOR;
     self.webView.scrollView.bounces = NO;
     self.webView.delegate = self;
+    self.webView.allowsInlineMediaPlayback = YES;
 
     self.view.backgroundColor = self.routerInfo.backgroundColor? [UIColor colorWithHexString:self.routerInfo.backgroundColor]: K_BACKGROUND_COLOR;
 
