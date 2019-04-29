@@ -25,4 +25,5 @@
 
 - (void)setViewMovedUp:(BOOL)movedUp;
 - (void)keyboardWasShown:(NSNotification*)notification;
+
 @end
