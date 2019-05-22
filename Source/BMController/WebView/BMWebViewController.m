@@ -79,10 +79,6 @@
 
     self.urlStr = self.routerInfo.url;
     [self reloadURL];
-    
-    /* 获取js的运行环境 */
-    self.jsContext = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    [self injectionJsMethod];
 }
 
 - (CAShapeLayer *)progressLayer
@@ -241,6 +237,10 @@
 {
     /** 检查一下字体大小 */
     [self.webView checkCurrentFontSize];
+    
+    /* 获取js的运行环境， webView 中跳转多个页面需要重新注入方法*/
+    self.jsContext = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    [self injectionJsMethod];
     
     NSString * docTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     if (docTitle && docTitle.length) {
