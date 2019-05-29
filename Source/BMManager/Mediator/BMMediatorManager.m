@@ -22,6 +22,7 @@
 #import "BMUserInfoModel.h"
 #import "BMDB.h"
 #import "BMAppDelegate.h"
+#import "ZDWKWebViewController.h"
 
 @interface BMMediatorManager ()
 
@@ -259,7 +260,12 @@
 
 - (void)toWebViewWithRouterInfo:(BMWebViewRouterModel *)routerInfo
 {
-    BMWebViewController *webView = [[BMWebViewController alloc] initWithRouterModel:routerInfo];
+    UIViewController *webView;
+    if (routerInfo.isWK) {
+        webView = [[ZDWKWebViewController alloc] initWithRouterModel:routerInfo];
+    }else {
+        webView = [[BMWebViewController alloc] initWithRouterModel:routerInfo];
+    }
     webView.hidesBottomBarWhenPushed = YES;
     [self.currentViewController.navigationController pushViewController:webView animated:YES];
 }
