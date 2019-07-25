@@ -77,7 +77,7 @@ _Pragma("clang diagnostic pop")
 #define K_DARK_TEXT_COLOR       [UIColor darkTextColor]
 
 #define K_NAV_BAR_COLOR         UIColorFromValue(0x07ae9c)
-#define K_BACKGROUND_COLOR      UIColorFromValue(0xeff3f4)
+#define K_BACKGROUND_COLOR      UIColorFromValue(0xf8f8f8)
 #define K_LINE_COLOR            UIColorFromValue(0xdfe1eb)
 #define K_BUTTON_COLOR          UIColorFromValue(0x16d4b8)
 #define K_TITLE_COLOR           UIColorFromValue(0x666666)
