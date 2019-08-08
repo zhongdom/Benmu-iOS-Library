@@ -280,8 +280,9 @@
     }
     
     if (self.isEchat) {
-        //native去接管 Video 和 图片轮播管理
+        //native去接管 Video 、 图片轮播管理，链接跳转
         [self callJSFunction:@"setMediaPlayer" andValue:@{@"video":@1,@"image":@1}];
+        [self callJSFunction:@"setLinkOpener" andValue:@{@"native":@1}];
     }
     
 }
@@ -513,6 +514,52 @@
         }
     }
     return string;
+}
+
+#pragma mark -- 接管链接点击事件
+-(void)openLink:(id)value{
+    // 判断一下异常
+    if (value == nil || [value isEqualToString:@""] || [value isEqualToString:@"null"]) {
+        return ;
+    }
+    
+    NSURL *url = [NSURL URLWithString:[value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *param in [url.query componentsSeparatedByString:@"&"]) {
+        NSArray *elts = [param componentsSeparatedByString:@"="];
+        if([elts count] < 2) continue;
+        [params setObject:[elts lastObject] forKey:[elts firstObject]];
+    }
+    
+    if (!params) {
+        return ;
+    }
+    
+    BMRouterModel *routerModel = [BMRouterModel yy_modelWithJSON:params];
+    
+    if (!routerModel.url) {
+        return ;
+    }
+    
+    // web端传过来的页面名为income.js，需要找到页面路径 eg. /pages/vip/income/income.js
+    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:[NSString stringWithFormat:@"%@/bundle", K_JS_BUNDLE_PATH]];
+    NSString *documentsSubpath;
+    while (documentsSubpath = [direnum nextObject]) {
+        if ([documentsSubpath.lastPathComponent isEqual:routerModel.url]) {
+            break ;
+        }
+    }
+    
+    if (documentsSubpath) {
+        // 搜索结果是pages/vip/income/income.js这种形式，需要在前面拼接 /
+        routerModel.url = [NSString stringWithFormat:@"/%@", documentsSubpath]; //[NSString stringWithFormat:@"%@/%@", K_JS_BUNDLE_PATH, documentsSubpath];
+        if (routerModel.navTitle) {
+            routerModel.navTitle = [routerModel.navTitle stringByRemovingPercentEncoding];
+        } else {
+            routerModel.navTitle = @"人人优品";
+        }
+        [[BMMediatorManager shareInstance] openViewControllerWithRouterModel:routerModel weexInstance:nil];
+    }
 }
 
 #pragma mark -- 浏览图片

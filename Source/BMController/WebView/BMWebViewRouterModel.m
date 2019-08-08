@@ -15,6 +15,7 @@
     if (self = [super init]) {
         
         _navShow = YES;
+        _isWK = YES;
     }
     
     return self;

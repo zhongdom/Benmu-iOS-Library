@@ -14,5 +14,5 @@
 @property (nonatomic, copy) NSString *title;            /**< 页面标题 */
 @property (nonatomic, assign) BOOL navShow;             /**< 是否隐藏导航栏 */
 @property (nonatomic, copy) NSString *backgroundColor;  /**< 页面背景颜色 */
-@property (nonatomic, assign) BOOL isWK;                /**< 是否使用WKWebView */
+@property (nonatomic, assign) BOOL isWK;                /**< 是否使用WKWebView，默认使用wkwebview */
 @end
