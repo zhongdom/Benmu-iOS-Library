@@ -541,6 +541,12 @@
         return ;
     }
     
+    routerModel.params = params;
+
+    if (params[@"navShow"] && [params[@"navShow"] intValue] == 0) {
+        routerModel.navShow = NO;
+    }
+
     // web端传过来的页面名为income.js，需要找到页面路径 eg. /pages/vip/income/income.js
     NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:[NSString stringWithFormat:@"%@/bundle", K_JS_BUNDLE_PATH]];
     NSString *documentsSubpath;
