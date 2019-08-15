@@ -217,7 +217,26 @@ WX_EXPORT_METHOD(@selector(scanImage::))
 }
 
 - (void)viewController:(PBViewController *)viewController didLongPressedPageAtIndex:(NSInteger)index presentedImage:(UIImage *)presentedImage {
-    NSLog(@"didLongPressedPageAtIndex: %@", @(index));
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否保存图片" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImageWriteToSavedPhotosAlbum(presentedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [viewController presentViewController:alert animated:YES completion:nil];
+}
+// the callback for PhotoAlbum.
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (!error) {
+        // 成功
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"图片保存成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil]];
+        [_photoBrowser presentViewController:alert animated:YES completion:nil];
+    } else {
+        // 失败
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"图片保存失败" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil]];
+        [_photoBrowser presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 @end
