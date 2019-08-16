@@ -547,15 +547,26 @@
         routerModel.navShow = NO;
     }
 
-    // web端传过来的页面名为income.js，需要找到页面路径 eg. /pages/vip/income/income.js
+    // web端传过来的页面名为income.js或者orderDetail/index.js这种形式，需要找到页面路径为 /pages/vip/income/income.js z
     NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:[NSString stringWithFormat:@"%@/bundle", K_JS_BUNDLE_PATH]];
     NSString *documentsSubpath;
-    while (documentsSubpath = [direnum nextObject]) {
-        if ([documentsSubpath.lastPathComponent isEqual:routerModel.url]) {
-            break ;
+    NSArray *pathArr = [routerModel.url componentsSeparatedByString:@"/"];
+    if (pathArr.count == 2) {
+        while (documentsSubpath = [direnum nextObject]) {
+            if ([documentsSubpath.lastPathComponent isEqual:pathArr.firstObject]) {
+                break ;
+            }
+        }
+        if (documentsSubpath) {
+            documentsSubpath = [NSString stringWithFormat:@"%@/index.js", documentsSubpath];
+        }
+    }else {
+        while (documentsSubpath = [direnum nextObject]) {
+            if ([documentsSubpath.lastPathComponent isEqual:routerModel.url]) {
+                break ;
+            }
         }
     }
-    
     if (documentsSubpath) {
         // 搜索结果是pages/vip/income/income.js这种形式，需要在前面拼接 /
         routerModel.url = [NSString stringWithFormat:@"/%@", documentsSubpath]; //[NSString stringWithFormat:@"%@/%@", K_JS_BUNDLE_PATH, documentsSubpath];
