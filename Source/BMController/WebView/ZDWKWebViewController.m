@@ -73,7 +73,7 @@
 - (instancetype)initWithRouterModel:(BMWebViewRouterModel *)model {
     if (self = [super init]) {
         self.routerInfo = model;
-        if ([model.url hasPrefix:@"https://echat.renrenyoupin.com"]) {
+        if ([model.url hasPrefix:@"https://echat.renrenyoupin.com"] || [model.url hasPrefix:@"https://ps.echatsoft.com/"]) {
             self.isEchat = YES;
         } else {
             self.isEchat = NO;
@@ -173,7 +173,7 @@
         _showProgress = NO;
         [self.webView goBack];
         
-        if ([self.webView canGoBack] && [self.navigationItem.leftBarButtonItems count] < 2) {
+        if ([self.webView canGoBack] && [self.navigationItem.leftBarButtonItems count] < 2 && !self.isEchat) {
             UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBar_BackItemIcon"] style:UIBarButtonItemStylePlain target:self action:@selector(backItemClicked)];
             UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeItemClicked)];
             self.navigationItem.leftBarButtonItems = @[backItem, closeItem];
@@ -404,7 +404,7 @@
             break;
         case 4:{
             self.isMsgBox = YES;
-            self.navigationItem.rightBarButtonItem.customView.hidden = YES;
+            self.navigationItem.rightBarButtonItem = nil;
         }
             break;
         case 3:{
@@ -413,11 +413,12 @@
             break;
         case 2:{
             self.isMsgBox = YES;
-            self.navigationItem.rightBarButtonItem.customView.hidden = YES;
+            self.navigationItem.rightBarButtonItem = nil;
         }
             break;
         case 1:{
-            self.navigationItem.rightBarButtonItem.customView.hidden = NO;
+            UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeChat)];
+            self.navigationItem.rightBarButtonItem = closeItem;
         }
             break;
         default:
@@ -450,7 +451,7 @@
         UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeChat)];
         self.navigationItem.rightBarButtonItem = closeItem;
     } else {
-        self.navigationItem.rightBarButtonItem.customView.hidden = YES;
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
