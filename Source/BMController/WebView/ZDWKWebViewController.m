@@ -352,7 +352,18 @@
     }
 }
 
-//事件分发
+-(NSDictionary *)string2Dict:(NSString *)str{
+    //转换
+    NSData * jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    if(error) {
+        return nil;
+    }
+    return dict;
+}
+
+#pragma mark --- 事件分发
 -(void)methods:(NSDictionary *)dict{
     NSString * fuckey = @"functionName";
     NSString * valueKey = @"value";
@@ -366,16 +377,6 @@
     }
 }
 
--(NSDictionary *)string2Dict:(NSString *)str{
-    //转换
-    NSData * jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
-    if(error) {
-        return nil;
-    }
-    return dict;
-}
 
 -(void)closeWeb{
     _isLeaveChatWindow = YES;
@@ -399,7 +400,11 @@
     
     switch (chatEvent) {
         case 6:{
-//            self.isMsgBox = NO;
+            self.isMsgBox = NO;
+            NSString * companyName = value[@"eventValue"][@"companyName"];
+            if (companyName != nil ) {
+                self.navigationItem.title = companyName;
+            }
         }
             break;
         case 4:{
@@ -414,11 +419,17 @@
         case 2:{
             self.isMsgBox = YES;
             self.navigationItem.rightBarButtonItem = nil;
+            self.navigationItem.title = @"客服中心";
         }
             break;
         case 1:{
             UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeChat)];
             self.navigationItem.rightBarButtonItem = closeItem;
+            //改标题
+            NSString * companyName = value[@"eventValue"][@"companyName"];
+            if (companyName != nil ) {
+                self.navigationItem.title = companyName;
+            }
         }
             break;
         default:
