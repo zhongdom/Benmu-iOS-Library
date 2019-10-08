@@ -217,7 +217,13 @@ WX_EXPORT_METHOD(@selector(scanImage::))
 }
 
 - (void)viewController:(PBViewController *)viewController didLongPressedPageAtIndex:(NSInteger)index presentedImage:(UIImage *)presentedImage {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+     UIAlertController *alert;
+    // 修复iPad崩溃问题
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+         alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    } else {
+         alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    }
     [alert addAction:[UIAlertAction actionWithTitle:@"保存图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImageWriteToSavedPhotosAlbum(presentedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }]];
