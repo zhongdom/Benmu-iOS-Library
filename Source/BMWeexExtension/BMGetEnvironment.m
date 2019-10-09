@@ -25,6 +25,7 @@
 #define BMTouchBarHeight @"touchBarHeight"
 #define BMTabbarHeight @"tabbarHeight"
 #define BMJsVersion @"jsVersion"
+#define BMTimestamp @"timestamp"
 
 
 @implementation BMGetEnvironment
@@ -130,6 +131,13 @@
             jsVersion = userInfo[@"jsVersion"];
         }
         [bmData setValue:jsVersion forKey:BMJsVersion];
+        //打包日期
+        NSString *timestamp = @"时间戳取不到";
+        if ([userInfo isKindOfClass:[NSDictionary class]] && userInfo[@"timestamp"]) {
+            timestamp = [NSString stringWithFormat:@"%@", userInfo[@"timestamp"]];
+        }
+        [bmData setValue:timestamp forKey:BMTimestamp];
+        
         
         environment = [[NSDictionary alloc] initWithDictionary:bmData];
     });
