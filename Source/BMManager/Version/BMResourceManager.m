@@ -47,7 +47,8 @@ typedef NS_ENUM(NSUInteger, BMResourceVersion) {
 
 
 typedef NS_ENUM(NSUInteger, BMResourceCheckUpdateCode) {
-    BMResourceCheckUpdateSuccess= 0,  //查询成功
+    BMResourceCheckUpdateSuccess= 0,  // 查询成功
+    BMResourceJSVersionNotFound = 401, // JSVersion 不存在
     BMResourceCheckUpdateFail = 4001,
     BMResourceCheckUpdateLasted = 4000
 };
@@ -475,6 +476,11 @@ typedef NS_ENUM(NSUInteger, BMResourceCheckUpdateCode) {
             // 有更新版本
             [weakSelf downloadRemoteJSResource:data];
             
+        }
+        else if([resCode intValue] == BMResourceJSVersionNotFound && data){
+            
+            // JSVersion 不存在，走全量更新
+            [weakSelf downloadRemoteJSResource:data];
         }
         else if([resCode intValue] == BMResourceCheckUpdateFail){
             
