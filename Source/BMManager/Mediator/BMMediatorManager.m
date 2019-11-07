@@ -78,7 +78,11 @@
     
     if (routerModel.isNeedRootVC) {
         routerModel.type = K_ANIMATE_PRESENT;
-        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:controller animated:YES completion:nil];
+        BMNavigationController *navc = [[BMNavigationController alloc] initWithRootViewController:controller];
+        if (@available(iOS 13.0, *)) {
+            navc.modalPresentationStyle = UIModalPresentationFullScreen;
+         }
+        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:navc animated:YES completion:nil];
         return ;
     }
     
