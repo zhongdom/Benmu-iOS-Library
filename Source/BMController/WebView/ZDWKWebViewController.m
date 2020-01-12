@@ -73,7 +73,7 @@
 - (instancetype)initWithRouterModel:(BMWebViewRouterModel *)model {
     if (self = [super init]) {
         self.routerInfo = model;
-        if ([model.url hasPrefix:@"https://echat.renrenyoupin.com"] || [model.url hasPrefix:@"https://ps.echatsoft.com/"]) {
+        if ([model.url hasPrefix:@"https://echat.renrenyoupin.com"] || [model.url hasPrefix:@"https://ps.echatsoft.com"] || [model.url hasPrefix:@"https://www.echatsoft.com"]) {
             self.isEchat = YES;
         } else {
             self.isEchat = NO;

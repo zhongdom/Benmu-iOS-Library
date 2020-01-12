@@ -26,7 +26,7 @@ const char * imageDownloadFinishKey = "imageDownloadFinish";
 
 const char * placeholderOperationKey = "placeholderOperation";
 
-const char * imageSrcKey = "_imageSrc";
+const char * imageSrcKey = "src";
 
 const char * blurRadiusKey = "blurRadius";
 
@@ -205,8 +205,8 @@ static NSString * defaultKey = @"default";
 //    objc_property_t imageSrcProperty = class_getProperty([WXImageComponent class], imageSrcKey);
 //
 //    NSString * imageSrcPName = [[NSString alloc] initWithCString:property_getName(imageSrcProperty) encoding:NSUTF8StringEncoding];
-    
-    id imageSrcValue = [self valueForKey:@"imageSrc"];
+    NSString *srcKey = [[NSString alloc] initWithCString:imageSrcKey encoding:NSUTF8StringEncoding];
+    id imageSrcValue = [self valueForKey: srcKey];
     
     NSString *imageSrc = nil;
     
