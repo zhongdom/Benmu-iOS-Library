@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "xionghuayu" => "18601949015@163.com" }
 
-  s.platform     = :ios, "8.0"
-  s.ios.deployment_target = "8.0"
+  s.platform     = :ios, "9.0"
+  s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/bmfe/eros-plugin-ios-baseLibrary.git", :tag => s.version.to_s }
   s.requires_arc = true
   
@@ -20,10 +20,10 @@ Pod::Spec.new do |s|
   s.dependency 'Masonry', '1.1.0'
   s.dependency 'YYModel', '1.0.4'
   s.dependency 'SSZipArchive', '2.2.2'
-  s.dependency 'YTKNetwork', '2.0.4'
+  s.dependency 'YTKNetwork', '2.1.4'
   s.dependency 'SocketRocket', '0.5.1'
-  s.dependency 'SDWebImage', '5.0.6'
-  s.dependency 'MJRefresh', '3.2.0'
+  s.dependency 'SDWebImage', '5.4.2'
+  s.dependency 'MJRefresh', '3.3.1'
   s.dependency 'CTMediator', '13'
 
   #Device信息非ARC
@@ -83,9 +83,9 @@ Pod::Spec.new do |s|
     ss.public_header_files = "Source/BMModule/**/*.h"
     ss.resources = 'Source/BMModule/Modal/SVProgressHUD/SVProgressHUD.bundle'
     ss.requires_arc  = true
-    ss.dependency "Realm",'3.17.0'
+    ss.dependency "Realm",'5.0.0-beta.2'
     ss.dependency "BindingX",'1.0.3'
-    ss.dependency 'TZImagePickerController', '3.2.1'
+    ss.dependency 'TZImagePickerController', '3.2.9'
   end
 
   #Weex BMManager
@@ -115,7 +115,7 @@ Pod::Spec.new do |s|
     ss.public_header_files = "Source/BMComponent/**/*.h"
     ss.requires_arc  = true
     ss.resources = 'Source/BMComponent/Calendar/Resources/*.png','Source/BMComponent/Chart/Resources/*'
-    ss.dependency 'FSCalendar','2.8.0'
+    ss.dependency 'FSCalendar','2.8.1'
     ss.dependency 'YYText', '1.0.7'
   end
 

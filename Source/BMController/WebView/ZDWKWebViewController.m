@@ -320,8 +320,10 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
         });
          decisionHandler(WKNavigationActionPolicyCancel);
-    }
-    else {
+    } else if ([scheme isEqualToString:@"weixin"] || [scheme isEqualToString:@"alipay"]) {
+        [[UIApplication sharedApplication] openURL: URL];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
