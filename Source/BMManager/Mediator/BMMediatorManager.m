@@ -13,7 +13,6 @@
 #import "BMNavigationController.h"
 #import "BMBaseViewController.h"
 #import "BMTabBarController.h"
-#import "BMWebViewController.h"
 #import "BMResourceManager.h"
 #import "BMConfigManager.h"
 
@@ -282,12 +281,7 @@
 
 - (void)toWebViewWithRouterInfo:(BMWebViewRouterModel *)routerInfo
 {
-    UIViewController *webView;
-    if (routerInfo.isWK) {
-        webView = [[ZDWKWebViewController alloc] initWithRouterModel:routerInfo];
-    }else {
-        webView = [[BMWebViewController alloc] initWithRouterModel:routerInfo];
-    }
+    ZDWKWebViewController *webView = [[ZDWKWebViewController alloc] initWithRouterModel:routerInfo];
     webView.hidesBottomBarWhenPushed = YES;
     [self.currentViewController.navigationController pushViewController:webView animated:YES];
 }

@@ -27,7 +27,6 @@
 #import "WXSDKInstance+BMExtend.h"
 #import <WXEditComponent+BMExtend.h>
 #import <WXSDKEngine+BMExtend.h>
-#import <WXWebComponent+BMExtend.h>
 #import "BMDefine.h"
 
 
@@ -51,7 +50,6 @@
         [[self class] exchangeWeexEditComponent];
         [[self class] exchangeWeexTextComponent];
         [[self class] exchangeWeexScrollerComponent];
-        [[self class] exchangeWXWebComponent];
 //        [[self class] exchangeRecyclerComponent];
         
         [[self class] exchangeWeexImageComponent];
@@ -139,21 +137,6 @@
 {
     /* 替换 WXBridgeManager 的fire方法 */
     [self bm_swizzle:[WXBridgeManager class] Method:@selector(fireEvent:ref:type:params:domChanges:) withMethod:@selector(bm_fireEvent:ref:type:params:domChanges:)];
-}
-
-+ (void)exchangeWXWebComponent
-{
-    /* 替换 WXBridgeManager 的fire方法 */
-    [self bm_swizzle:[WXWebComponent class] Method:@selector(webViewDidFinishLoad:) withMethod:@selector(bm_webViewDidFinishLoad:)];
-    
-    /* 替换 WXWebComponent 的viewDidLoad方法 */
-    [self bm_swizzle:[WXWebComponent class] Method:@selector(viewDidLoad) withMethod:@selector(bm_viewDidLoad)];
-    
-    /* 替换 WXWebComponent 的setUrl方法 */
-    [self bm_swizzle:[WXWebComponent class] Method:@selector(setUrl:) withMethod:@selector(bm_setUrl:)];
-    
-    /* 替换 WXWebComponent 的loadURL 方法*/
-    [self bm_swizzle:[WXWebComponent class] Method:@selector(loadURL:) withMethod:@selector(bm_loadURL:)];
 }
 
 + (void)exchangeRecyclerComponent
